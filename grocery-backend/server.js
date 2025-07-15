@@ -4,6 +4,7 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const pantryRoutes = require('./routes/pantryRoutes');
+const groceryListRoutes = require('./routes/groceryListRoutes');
 
 
 dotenv.config();
@@ -19,6 +20,7 @@ connectDB();
 // TODO: Add routes here
 app.use('/api/auth', authRoutes);
 app.use('/api/pantry', pantryRoutes);
+app.use('/api/grocery-lists', groceryListRoutes);
 
 
 
