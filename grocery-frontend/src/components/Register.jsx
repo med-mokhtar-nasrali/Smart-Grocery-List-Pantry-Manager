@@ -26,11 +26,11 @@ export default function Register() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+        <div className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#111827' }}>
             <div className="max-w-md w-full bg-white p-8 rounded-md shadow">
-                <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
-                {error && <p className="mb-4 text-red-600 text-sm">{error}</p>}
-                {success && <p className="mb-4 text-green-600 text-sm">{success}</p>}
+                <h2 className="text-2xl font-semibold mb-6 text-center">Register</h2>
+                {error && <p className="mb-4 text-red-600">{error}</p>}
+                {success && <p className="mb-4 text-green-600">{success}</p>}
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <input
                         type="text"
@@ -67,12 +67,6 @@ export default function Register() {
                         Register
                     </button>
                 </form>
-                <p className="mt-4 text-sm text-center">
-                    Already have an account?{' '}
-                    <a href="/login" className="text-indigo-600 hover:underline">
-                        Login
-                    </a>
-                </p>
             </div>
         </div>
     );
