@@ -5,6 +5,8 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const pantryRoutes = require('./routes/pantryRoutes');
 const groceryListRoutes = require('./routes/groceryListRoutes');
+const shoppingListRoutes = require('./routes/shoppingListRoutes');
+
 
 
 dotenv.config();
@@ -21,6 +23,8 @@ connectDB();
 app.use('/api/auth', authRoutes);
 app.use('/api/pantry', pantryRoutes);
 app.use('/api/grocery-lists', groceryListRoutes);
+app.use('/api/shopping-list', shoppingListRoutes);
+
 
 
 

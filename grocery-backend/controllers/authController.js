@@ -65,14 +65,59 @@ const login = async (req, res) => {
 const getProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-passwordHash');
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
         res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
 };
 
+const updateProfile = async (req, res) => {
+    try {
+        const { name, timezone } = req.body;
+        const user = await User.findById(req.user.id);
+
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        user.name = name || user.name;
+        user.timezone = timezone || user.timezone;
+
+        await user.save();
+
+        res.status(200).json({ message: 'Profile updated successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
+const changePassword = async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+        const user = await User.findById(req.user.id);
+
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        // Check current password
+        const isMatch = await bcrypt.compare(currentPassword, user.passwordHash);
+        if (!isMatch) return res.status(400).json({ message: 'Current password is incorrect' });
+
+        // Hash new password
+        const salt = await bcrypt.genSalt(10);
+        user.passwordHash = await bcrypt.hash(newPassword, salt);
+
+        await user.save();
+
+        res.status(200).json({ message: 'Password changed successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
 module.exports = {
     register,
     login,
-    getProfile
+    getProfile,
+    updateProfile,
+    changePassword,
 };

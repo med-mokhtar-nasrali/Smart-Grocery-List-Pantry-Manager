@@ -5,8 +5,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import PantryPage from './pages/PantryPage';
-import './index.css'; // <- this line is critical!
+import './index.css';
 import Home from './pages/Home';
+import ShoppingListPage from './pages/ShoppingListPage';
+import ProfilePage from './pages/ProfilePage';
 
 
 // A simple auth check, replace with your real auth logic
@@ -33,6 +35,23 @@ function App() {
           element={
             <ProtectedRoute>
               <PantryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/shopping-list"
+          element={
+            <ProtectedRoute>
+              <ShoppingListPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
             </ProtectedRoute>
           }
         />
